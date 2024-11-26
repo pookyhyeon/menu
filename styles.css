@@ -1,70 +1,86 @@
+/* 동영상 배경 설정 */
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+#background-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 공통 스타일 */
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
-    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+    overflow: hidden;
+}
+
+.hidden {
+    display: none;
+}
+
+/* 인트로 메시지 */
+.intro-container {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+    animation: fadeout 3s forwards 2s;
 }
 
 .menu-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-header {
     text-align: center;
-    margin-bottom: 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+    display: none;
 }
 
 .menu-title {
-    font-size: 2em;
-    color: #444;
-    margin: 0;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #ffcc00;
 }
 
 .menu-categories {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
 }
 
-.menu-category {
-    background-color: #f0f0f0;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
 .menu-category h2 {
-    font-size: 1.5em;
-    color: #555;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 5px;
+    font-size: 1.8em;
     margin-bottom: 10px;
+    color: #ffcc00;
 }
 
-ul {
+.menu-category ul {
     list-style: none;
     padding: 0;
-    margin: 0;
 }
 
-li {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
+.menu-category li {
+    font-size: 1.2em;
+    margin: 10px 0;
 }
 
-li:last-child {
-    border-bottom: none;
-}
-
-.price {
-    font-weight: bold;
-    color: #000;
+/* 애니메이션 */
+@keyframes fadeout {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
 }

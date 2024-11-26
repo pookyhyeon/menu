@@ -3,70 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>식당 메뉴판</title>
+    <title>현밍의 집</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="menu-container">
+    <div class="video-background">
+        <video autoplay muted loop id="background-video">
+            <source src="open.mp4" type="video/mp4">
+            당신의 브라우저는 동영상을 지원하지 않습니다.
+        </video>
+    </div>
+
+    <div class="intro-container" id="intro">
+        <h1>어서오세요, 현밍의 집</h1>
+    </div>
+
+    <div class="menu-container hidden" id="menu">
         <header>
-            <h1 class="menu-title">식당 메뉴판</h1>
+            <h1 class="menu-title">메뉴판</h1>
         </header>
 
         <div class="menu-categories">
             <div class="menu-category">
                 <h2>음료</h2>
                 <ul>
-                    <li>
-                        <span>아메리카노</span>
-                        <span class="price">3,000원</span>
-                    </li>
-                    <li>
-                        <span>카페라떼</span>
-                        <span class="price">3,500원</span>
-                    </li>
-                    <li>
-                        <span>오렌지 주스</span>
-                        <span class="price">4,000원</span>
-                    </li>
+                    <li>아메리카노</li>
+                    <li>카페라떼</li>
+                    <li>오렌지 주스</li>
                 </ul>
             </div>
 
             <div class="menu-category">
                 <h2>식사</h2>
                 <ul>
-                    <li>
-                        <span>김치찌개</span>
-                        <span class="price">7,000원</span>
-                    </li>
-                    <li>
-                        <span>비빔밥</span>
-                        <span class="price">8,000원</span>
-                    </li>
-                    <li>
-                        <span>불고기 덮밥</span>
-                        <span class="price">9,000원</span>
-                    </li>
+                    <li>김치찌개</li>
+                    <li>비빔밥</li>
+                    <li>불고기 덮밥</li>
                 </ul>
             </div>
 
             <div class="menu-category">
                 <h2>디저트</h2>
                 <ul>
-                    <li>
-                        <span>치즈케이크</span>
-                        <span class="price">5,000원</span>
-                    </li>
-                    <li>
-                        <span>마카롱</span>
-                        <span class="price">4,500원</span>
-                    </li>
-                    <li>
-                        <span>티라미수</span>
-                        <span class="price">6,000원</span>
-                    </li>
+                    <li>치즈케이크</li>
+                    <li>마카롱</li>
+                    <li>티라미수</li>
                 </ul>
             </div>
         </div>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
