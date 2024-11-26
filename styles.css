@@ -1,79 +1,59 @@
-/* 비디오 배경 */
-.video-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: -1;
-}
-
-#background-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
 /* 공통 스타일 */
 body {
-    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    font-family: 'Nanum Pen Script', cursive; /* 손글씨 느낌 */
     color: white;
-    overflow: hidden;
-}
-
-.hidden {
-    display: none; /* 숨김 클래스 */
-}
-
-/* 인트로 메시지 */
-.intro-container {
+    background-color: #2c3e50; /* 어두운 배경 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 20px;
-    border-radius: 10px;
+}
+
+/* 제목 스타일 */
+.menu-title {
+    font-size: 2.5em;
+    color: #ffcc00;
+    margin: 20px 0;
+}
+
+/* 전체 컨테이너 */
+.content-container {
+    width: 90%;
+    max-width: 600px;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
 }
 
 /* 공지사항 스타일 */
 .notice {
-    background-color: rgba(255, 255, 255, 0.2);
-    color: #ffffff;
-    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffcc00;
+    padding: 20px;
     border-radius: 10px;
-    margin-bottom: 20px;
-    font-size: 1.2em;
+    margin-bottom: 30px;
+    font-size: 1.5em;
     font-weight: bold;
-    text-align: center;
+    text-align: left;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
+.notice ul {
+    margin-top: 10px;
+    padding-left: 20px;
+    color: white;
+    font-weight: normal;
+    font-size: 1.2em;
+}
+
 /* 메뉴판 스타일 */
-.menu-container {
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.8);
-    padding: 40px;
-    border-radius: 15px;
-    max-width: 90%;
-    width: 80%;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
-
-.menu-title {
-    font-size: 3em;
-    margin-bottom: 30px;
-    color: #ffcc00;
-}
-
 .menu-categories {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+    gap: 20px;
 }
 
 .menu-category {
@@ -96,6 +76,8 @@ body {
 
 .menu-category li {
     font-size: 1.5em;
-    margin: 15px 0;
+    margin: 10px 0;
     color: #fff;
+    text-align: left;
+    line-height: 1.6;
 }
