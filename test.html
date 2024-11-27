@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>음식 궁합 테스트</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 동영상 배경 -->
+    <div class="video-background">
+        <video autoplay muted loop playsinline>
+            <source src="open.mp4" type="video/mp4">
+            동영상 지원이 되지 않는 브라우저입니다.
+        </video>
+    </div>
+
+    <!-- 상단 제목 -->
+    <header>
+        <h1 class="menu-title">음식 궁합 테스트</h1>
+    </header>
+
+    <div class="content-container">
+        <!-- 테스트 질문 -->
+        <div id="question-container">
+            <p class="question-text">당신의 하루를 가장 잘 묘사하는 단어는?</p>
+            <div class="answer-options">
+                <button class="answer-button" data-answer="활기찬">활기찬</button>
+                <button class="answer-button" data-answer="차분한">차분한</button>
+                <button class="answer-button" data-answer="열정적인">열정적인</button>
+                <button class="answer-button" data-answer="편안한">편안한</button>
+            </div>
+        </div>
+    
+        <!-- 결과 출력 -->
+        <div id="result-container" style="display: none;">
+            <p class="result-text">당신에게 어울리는 음식은 <span id="result-food"></span>입니다!</p>
+        </div>
+    </div>
+    
+
+    <script src="test.js"></script>
+</body>
+</html>
