@@ -2,7 +2,8 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Nanum Pen Script', cursive; /* 손글씨 느낌 */
+    font-family: 'Gulim', 'Malgun Gothic', sans-serif; /* 굴림 우선, 대체 폰트 포함 */
+
     color: var(--text-color);
     background-color: var(--background-color); /* 부드러운 어두운 톤 */
     display: flex;
@@ -10,6 +11,7 @@ body {
     align-items: center;
     text-align: center;
 }
+
 
 /* 색상 정의 */
 :root {
