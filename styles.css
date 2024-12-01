@@ -236,3 +236,138 @@ body {
     color: #ffcc00;
     margin-top: 30px;
 }
+
+/* 공통 텍스트 강조 */
+.highlight {
+    color: var(--highlight-color);
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(234, 179, 8, 0.8);
+    animation: text-glow 2s infinite;
+}
+
+/* 텍스트 강조 애니메이션 */
+@keyframes text-glow {
+    0% {
+        text-shadow: 0 0 5px rgba(234, 179, 8, 0.5);
+    }
+    50% {
+        text-shadow: 0 0 15px rgba(234, 179, 8, 1);
+    }
+    100% {
+        text-shadow: 0 0 5px rgba(234, 179, 8, 0.5);
+    }
+}
+
+/* 배너 영역 */
+.banner {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    text-align: center;
+    padding: 15px 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 하단 고정 푸터 */
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: var(--menu-bg-color);
+    color: var(--text-color);
+    text-align: center;
+    padding: 10px;
+    font-size: 0.9em;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 입력 필드 애니메이션 */
+input[type="text"] {
+    animation: pulse 2s infinite;
+}
+
+/* 필드 깜빡임 효과 */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 10px rgba(234, 179, 8, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(234, 179, 8, 0.5);
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(234, 179, 8, 0.2);
+    }
+}
+
+/* 이름 입력 페이지 스타일 */
+.name-container {
+    background-color: var(--menu-bg-color); /* 기존 투명 배경 */
+    color: var(--text-color); /* 밝은 텍스트 색상 */
+    padding: 30px;
+    margin: 50px auto;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+}
+
+.name-container h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: var(--main-color); /* 강조된 노란색 */
+}
+
+.name-container p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.name-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.name-container input[type="text"] {
+    font-size: 1em;
+    padding: 10px;
+    border: 2px solid #64748b;
+    border-radius: 8px;
+    width: 100%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.name-container input[type="text"]:focus {
+    border-color: var(--highlight-color); /* 강조 색상 */
+    box-shadow: 0 4px 8px rgba(234, 179, 8, 0.3); /* 부드러운 강조 */
+}
+
+.name-container button {
+    background-color: var(--secondary-color); /* 코랄 색상 */
+    color: var(--text-color);
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.name-container button:hover {
+    background-color: #e94e3f; /* 강조된 코랄 */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+.name-container button:active {
+    transform: translateY(0); /* 클릭 시 원래 위치로 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}

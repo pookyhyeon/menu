@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>어서오세요 정현의 집</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 동영상 배경 -->
+    <div class="video-background">
+        <video autoplay muted loop playsinline>
+            <source src="open.mp4" type="video/mp4">
+            동영상 지원이 되지 않는 브라우저입니다.
+        </video>
+    </div>
+
+    <!-- 상단 제목 -->
+    <header>
+        <h1 class="menu-title">어서오세요 정현의 집</h1>
+    </header>
+
+
+    <!-- 사용자 이름 환영 메시지 -->
+    <div class="welcome-message">
+        <script>
+            // URL 파라미터에서 이름 가져오기
+            const urlParams = new URLSearchParams(window.location.search);
+            const name = urlParams.get('name') || "손님";
+
+            // 이름 출력
+            document.write(`<h2>반갑습니다, ${name}님!!</h2>`);
+        </script>
+    </div>
+<div class="banner">🎉 특별 이벤트: 오늘만 전 메뉴 10% 할인! 🎉</div>
+
+    <!-- 기존 메뉴와 컨텐츠 -->
+    <div class="content-container">
+        <!-- 공지사항 -->
+        <div class="notice">
+            <p>📢 우리 집에 오면 지켜야 할 규칙들:</p>
+            <ul>
+                <li>😊 서로 존중하기</li>
+                <li>🚮 쓰레기는 반드시 분리배출</li>
+                <li>📴 조용한 환경을 위해 휴대폰은 진동으로</li>
+                <li>🕒 음식 소요 시간에 여유를 가지기</li>
+            </ul>
+        </div>
+
+        <!-- 메뉴판 -->
+        <header>
+            <h1 class="menu-title">우리 집 메뉴판</h1>
+        </header>
+        <div class="menu-categories-wrapper">
+            <div class="menu-categories">
+                <div class="menu-category">
+                    <h2>음료</h2>
+                    <ul>
+                        <li>아메리카노 - ⏰ 5분 </li>
+                        <li>카페라떼 - ⏰ 7분 </li>
+                        <li>오렌지 주스 - ⏰ 3분 </li>
+                    </ul>
+                </div>
+                <div class="menu-category">
+                    <h2>식사</h2>
+                    <ul>
+                        <li>돼지 김치찜 - ⏰ 15분 - 💸 3,000원</li>
+                        <li>스테이크 - ⏰ 22분 - 💸 6,500원</li>
+                        <li>파스타 - ⏰ 20분 - 💸 4,500원</li>
+                    </ul>
+                </div>
+                <div class="menu-category">
+                    <h2>디저트</h2>
+                    <ul>
+                        <li>치즈케이크 - ⏰ 10분 </li>
+                        <li>마카롱 - ⏰ 8분 </li>
+                        <li>티라미수 - ⏰ 12분 </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="button-container">
+        <a href="test.html" class="match-button">나와 맞는 음식 궁합 찾아보기</a>
+    </div>
+</body>
+</html>
