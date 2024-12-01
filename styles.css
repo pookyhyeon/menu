@@ -305,69 +305,66 @@ input[type="text"] {
 
 /* 이름 입력 페이지 스타일 */
 .name-container {
-    background-color: var(--menu-bg-color); /* 기존 투명 배경 */
-    color: var(--text-color); /* 밝은 텍스트 색상 */
-    padding: 30px;
-    margin: 50px auto;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    text-align: center;
-    max-width: 400px;
-    width: 90%;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 90%; /* 기본 크기 */
+    max-width: 400px; /* 데스크톱 최대 크기 */
 }
 
+/* 제목 스타일 */
 .name-container h1 {
-    font-size: 2em;
-    margin-bottom: 20px;
-    color: var(--main-color); /* 강조된 노란색 */
+    font-size: 1.8em;
+    margin-bottom: 10px;
+    color: #333333;
 }
 
+/* 설명 텍스트 */
 .name-container p {
     font-size: 1.2em;
     margin-bottom: 20px;
+    color: #555555;
 }
 
-.name-container form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
+/* 입력 필드 스타일 */
 .name-container input[type="text"] {
-    font-size: 1em;
-    padding: 10px;
-    border: 2px solid #64748b;
-    border-radius: 8px;
     width: 100%;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    outline: none;
-    transition: border-color 0.3s, box-shadow 0.3s;
+    padding: 10px;
+    font-size: 1em;
+    margin-bottom: 15px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    box-sizing: border-box;
 }
 
-.name-container input[type="text"]:focus {
-    border-color: var(--highlight-color); /* 강조 색상 */
-    box-shadow: 0 4px 8px rgba(234, 179, 8, 0.3); /* 부드러운 강조 */
-}
-
+/* 버튼 스타일 */
 .name-container button {
-    background-color: var(--secondary-color); /* 코랄 색상 */
-    color: var(--text-color);
+    width: 100%;
+    padding: 12px;
+    font-size: 1.2em;
+    background-color: #007bff;
+    color: #ffffff;
     border: none;
     border-radius: 8px;
-    padding: 10px 20px;
-    font-size: 1em;
     cursor: pointer;
-    transition: transform 0.2s, background-color 0.3s, box-shadow 0.3s;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
 }
 
+/* 버튼 호버 효과 */
 .name-container button:hover {
-    background-color: #e94e3f; /* 강조된 코랄 */
-    transform: translateY(-3px);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+    background-color: #0056b3;
 }
 
-.name-container button:active {
-    transform: translateY(0); /* 클릭 시 원래 위치로 */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+/* 반응형 디자인 */
+@media (max-width: 480px) {
+    .name-container h1 {
+        font-size: 1.5em;
+    }
+    .name-container p {
+        font-size: 1em;
+    }
+    .name-container button {
+        font-size: 1em;
+    }
 }
