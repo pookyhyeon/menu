@@ -70,15 +70,18 @@ const combinationsToFood = {
     // 결과 표시
     function showResult() {
         questionContainer.style.display = "none"; // 질문 숨기기
-
+    
         // 사용자가 선택한 답변 조합으로 결과 찾기
-        const userCombination = userChoices.join("-");
+        const userCombination = userChoices.map(choice => choice.trim()).join("-");
+        console.log("User Combination:", userCombination); // 디버깅용 출력
+    
         const food = combinationsToFood[userCombination] || "알 수 없음";
-
+        console.log("Matched Food:", food); // 디버깅용 출력
+    
         resultFood.textContent = food;
         resultContainer.style.display = "block"; // 결과 보이기
     }
-
+    
     // 초기화 및 시작
     loadNextQuestion();
 });
