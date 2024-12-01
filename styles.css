@@ -232,7 +232,7 @@ body {
 }
 
 .result-text {
-    font-size: 1.8em;
+    font-size: 1.5em;
     color: #ffcc00;
     margin-top: 30px;
 }
@@ -309,8 +309,8 @@ input[type="text"] {
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 90%; /* 기본 크기 */
-    max-width: 400px; /* 데스크톱 최대 크기 */
+    width: 80%; /* 기본 크기 */
+    max-width: 350px; /* 데스크톱 최대 크기 */
 }
 
 /* 제목 스타일 */
