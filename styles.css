@@ -108,3 +108,11 @@ body {
 .match-button:hover {
     background-color: #4cae4c;
 }
+
+.menu-category li img {
+    display: block;
+    margin: 0 auto;
+    width: 100px; /* 이미지 너비 */
+    height: 100px; /* 이미지 높이 */
+    border-radius: 8px; /* 둥근 모서리 */
+}
