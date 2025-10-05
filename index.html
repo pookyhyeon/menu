@@ -3,43 +3,114 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>예약 페이지</title>
+  <title>정현식당 예약 페이지</title>
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Nanum Pen Script', cursive;
+      text-align: center;
+      background-color: #fffaf5;
+    }
+    .name-container {
+      background: #ffffff;
+      display: inline-block;
+      margin-top: 60px;
+      padding: 40px 60px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h1 {
+      font-size: 3em;
+      color: #333;
+    }
+    label, p {
+      font-size: 1.6em;
+    }
+    input, select, button {
+      font-family: inherit;
+      font-size: 1.2em;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-top: 5px;
+    }
+    button {
+      background-color: #ffa4b5;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    button:hover {
+      background-color: #ff8a9e;
+    }
+    #success-message {
+      display: none;
+      font-size: 1.8em;
+      color: #008000;
+      margin-top: 20px;
+    }
+  </style>
 </head>
+
 <body>
   <div class="name-container">
-    <h1>안녕하세요 반갑습니다!</h1>
-    <p>먼저 예약 정보를 입력해주세요.</p>
+    <h1>정현식당 🍽</h1>
+    <p>안녕하세요! 아래 예약 정보를 입력해주세요.</p>
 
-    <!-- formsubmit.co로 이메일 전송 -->
-    <form action="https://formsubmit.co/여기에_본인_이메일주소" method="POST">
-      <!-- 숨김 필드: 예약 후 이동할 메뉴판 링크 -->
-      <input type="hidden" name="_next" value="https://yourdomain.com/menu.html">
-      <input type="hidden" name="_subject" value="새 예약이 도착했습니다!">
-
+    <form id="reservation-form">
       <label>이름</label><br>
-      <input type="text" name="name" placeholder="이름을 입력하세요" required><br><br>
+      <input type="text" name="name" id="name" placeholder="이름을 입력하세요" required><br><br>
 
       <label>예약 날짜</label><br>
-      <input type="date" name="date" required><br><br>
+      <input type="date" name="date" id="date" required><br><br>
 
-      <label>예약 시간 (30분 단위)</label><br>
-      <input type="time" name="time" step="1800" required><br><br>
+      <label>예약 시간</label><br>
+      <input type="time" name="time" id="time" required><br><br>
 
       <label>연락 수단</label><br>
-      <select name="contact_type" required>
+      <select name="contact_type" id="contact_type" required>
         <option value="">선택하세요</option>
         <option value="전화">전화</option>
         <option value="문자">문자</option>
-        <option value="이메일">이메일</option>
       </select><br><br>
 
-      <label>연락처 / 이메일 주소</label><br>
-      <input type="text" name="contact_info" placeholder="010-XXXX-XXXX 또는 이메일" required><br><br>
+      <label>연락처</label><br>
+      <input type="text" name="contact_info" id="contact_info" placeholder="010-XXXX-XXXX" required><br><br>
 
       <button type="submit">예약 확인</button>
     </form>
+
+    <div id="success-message">
+      ✅ 예약이 완료되었습니다!  
+      <br>감사합니다. 정현식당에서 기다리고 있겠습니다 :)
+    </div>
   </div>
+
+  <script>
+    document.getElementById("reservation-form").addEventListener("submit", function(event) {
+      event.preventDefault(); // 폼 전송 막기
+
+      // 입력값 읽기
+      const name = document.getElementById("name").value;
+      const date = document.getElementById("date").value;
+      const time = document.getElementById("time").value;
+      const contactType = document.getElementById("contact_type").value;
+      const contactInfo = document.getElementById("contact_info").value;
+
+      // 간단한 예약 확인 메시지
+      document.getElementById("success-message").innerHTML = 
+        `✅ ${name}님 예약이 완료되었습니다!<br>
+        📅 날짜: ${date}<br>
+        ⏰ 시간: ${time}<br>
+        📞 ${contactType}: ${contactInfo}<br><br>
+        정현식당에서 기다리고 있겠습니다 :)`;
+
+      // 폼 숨기고 메시지 표시
+      document.getElementById("reservation-form").style.display = "none";
+      document.getElementById("success-message").style.display = "block";
+    });
+  </script>
 </body>
 </html>
