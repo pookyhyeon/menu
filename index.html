@@ -61,55 +61,56 @@
 
     <form id="reservation-form">
       <label>이름</label><br>
-      <input type="text" name="name" id="name" placeholder="이름을 입력하세요" required><br><br>
+      <input type="text" id="name" placeholder="이름을 입력하세요" required><br><br>
 
       <label>예약 날짜</label><br>
-      <input type="date" name="date" id="date" required><br><br>
+      <input type="date" id="date" required><br><br>
 
       <label>예약 시간</label><br>
-      <input type="time" name="time" id="time" required><br><br>
+      <input type="time" id="time" required><br><br>
 
       <label>연락 수단</label><br>
-      <select name="contact_type" id="contact_type" required>
+      <select id="contact_type" required>
         <option value="">선택하세요</option>
         <option value="전화">전화</option>
         <option value="문자">문자</option>
       </select><br><br>
 
       <label>연락처</label><br>
-      <input type="text" name="contact_info" id="contact_info" placeholder="010-XXXX-XXXX" required><br><br>
+      <input type="text" id="contact_info" placeholder="010-XXXX-XXXX" required><br><br>
 
       <button type="submit">예약 확인</button>
     </form>
 
-    <div id="success-message">
-      ✅ 예약이 완료되었습니다!  
-      <br>감사합니다. 정현식당에서 기다리고 있겠습니다 :)
-    </div>
+    <div id="success-message"></div>
   </div>
 
   <script>
     document.getElementById("reservation-form").addEventListener("submit", function(event) {
-      event.preventDefault(); // 폼 전송 막기
+      event.preventDefault();
 
-      // 입력값 읽기
       const name = document.getElementById("name").value;
       const date = document.getElementById("date").value;
       const time = document.getElementById("time").value;
       const contactType = document.getElementById("contact_type").value;
       const contactInfo = document.getElementById("contact_info").value;
 
-      // 간단한 예약 확인 메시지
-      document.getElementById("success-message").innerHTML = 
-        `✅ ${name}님 예약이 완료되었습니다!<br>
-        📅 날짜: ${date}<br>
-        ⏰ 시간: ${time}<br>
+      // 완료 메시지 표시
+      const msg = document.getElementById("success-message");
+      msg.innerHTML = `
+        ✅ ${name}님 예약이 완료되었습니다!<br>
+        📅 ${date} / ⏰ ${time}<br>
         📞 ${contactType}: ${contactInfo}<br><br>
-        정현식당에서 기다리고 있겠습니다 :)`;
-
-      // 폼 숨기고 메시지 표시
+        정현식당에서 기다리고 있겠습니다 :)<br><br>
+        <small>5초 후 메뉴판으로 이동합니다...</small>
+      `;
+      msg.style.display = "block";
       document.getElementById("reservation-form").style.display = "none";
-      document.getElementById("success-message").style.display = "block";
+
+      // 5초 후 메뉴판으로 이동 (이름 정보를 함께 전달)
+      setTimeout(() => {
+        window.location.href = `welcome.html?name=${encodeURIComponent(name)}`;
+      }, 5000);
     });
   </script>
 </body>
