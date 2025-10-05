@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>정현식당 예약 페이지</title>
-  <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
   <style>
     body {
@@ -59,27 +58,18 @@
     <h1>정현식당 🍽</h1>
     <p>안녕하세요! 아래 예약 정보를 입력해주세요.</p>
 
-    <!-- ✅ formsubmit.co로 메일 전송 -->
-    <form id="reservation-form" action="https://formsubmit.co/ilu3312@naver.com" method="POST">
-      <!-- 필수 설정 -->
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_template" value="table">
-      <!-- 예약 후 이동 페이지 -->
-      <input type="hidden" name="_next" value="welcome.html">
-      <!-- 제목 -->
-      <input type="hidden" name="_subject" value="정현식당에 새 예약이 도착했습니다!">
-
+    <form id="reservation-form">
       <label>이름</label><br>
-      <input type="text" name="name" id="name" placeholder="이름을 입력하세요" required><br><br>
+      <input type="text" id="name" placeholder="이름을 입력하세요" required><br><br>
 
       <label>예약 날짜</label><br>
-      <input type="date" name="date" id="date" required><br><br>
+      <input type="date" id="date" required><br><br>
 
       <label>예약 시간</label><br>
-      <input type="time" name="time" id="time" required><br><br>
+      <input type="time" id="time" required><br><br>
 
       <label>연락 수단</label><br>
-      <select name="contact_type" id="contact_type" required>
+      <select id="contact_type" required>
         <option value="">선택하세요</option>
         <option value="전화">전화</option>
         <option value="문자">문자</option>
@@ -87,7 +77,7 @@
       </select><br><br>
 
       <label>연락처</label><br>
-      <input type="text" name="contact_info" id="contact_info" placeholder="010-XXXX-XXXX 또는 이메일" required><br><br>
+      <input type="text" id="contact_info" placeholder="010-XXXX-XXXX 또는 이메일" required><br><br>
 
       <button type="submit">예약 확인</button>
     </form>
@@ -96,8 +86,9 @@
   </div>
 
   <script>
-    // 폼 제출 시 화면에 메시지 표시 + 5초 후 자동 이동
-    document.getElementById("reservation-form").addEventListener("submit", function(event) {
+    const FORM_URL = "https://formsubmit.co/ajax/ilu3312@naver.com"; // ✅ Ajax 전송 전용 URL
+
+    document.getElementById("reservation-form").addEventListener("submit", async function(event) {
       event.preventDefault();
 
       const name = document.getElementById("name").value;
@@ -106,7 +97,7 @@
       const contactType = document.getElementById("contact_type").value;
       const contactInfo = document.getElementById("contact_info").value;
 
-      // 완료 메시지 표시
+      // 화면 메시지 표시
       const msg = document.getElementById("success-message");
       msg.innerHTML = `
         ✅ ${name}님 예약이 완료되었습니다!<br>
@@ -118,12 +109,25 @@
       msg.style.display = "block";
       document.getElementById("reservation-form").style.display = "none";
 
-      // 실제 이메일 전송 (FormSubmit으로 제출)
-      setTimeout(() => {
-        event.target.submit(); // 폼 실제 제출 (메일 전송)
-      }, 1000);
+      // ✅ FormSubmit으로 Ajax 전송
+      try {
+        await fetch(FORM_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            _subject: "정현식당에 새 예약이 도착했습니다!",
+            이름: name,
+            날짜: date,
+            시간: time,
+            연락수단: contactType,
+            연락처: contactInfo
+          })
+        });
+      } catch (error) {
+        console.error("메일 전송 실패:", error);
+      }
 
-      // 5초 후 메뉴판으로 이동
+      // ✅ 5초 후 메뉴판으로 이동
       setTimeout(() => {
         window.location.href = `welcome.html?name=${encodeURIComponent(name)}`;
       }, 5000);
