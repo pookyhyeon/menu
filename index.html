@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>정현식당 예약 페이지</title>
+  <title>정현식당 예약 및 주문 페이지</title>
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
   <style>
     body {
@@ -11,10 +11,10 @@
       text-align: center;
       background-color: #fffaf5;
     }
-    .name-container {
+    .container {
       background: #ffffff;
       display: inline-block;
-      margin-top: 60px;
+      margin-top: 40px;
       padding: 40px 60px;
       border-radius: 20px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -22,11 +22,12 @@
     h1 {
       font-size: 3em;
       color: #333;
+      margin-bottom: 10px;
     }
     label, p {
       font-size: 1.6em;
     }
-    input, select, button {
+    input, select, button, textarea {
       font-family: inherit;
       font-size: 1.2em;
       padding: 8px 12px;
@@ -44,6 +45,19 @@
     button:hover {
       background-color: #ff8a9e;
     }
+    .menu-section {
+      text-align: left;
+      margin-top: 30px;
+    }
+    .menu-section h2 {
+      font-size: 2em;
+      margin-bottom: 10px;
+      color: #ff7189;
+    }
+    .menu-item {
+      margin: 10px 0;
+      font-size: 1.4em;
+    }
     #success-message {
       display: none;
       font-size: 1.8em;
@@ -54,11 +68,12 @@
 </head>
 
 <body>
-  <div class="name-container">
+  <div class="container">
     <h1>정현식당 🍽</h1>
-    <p>안녕하세요! 아래 예약 정보를 입력해주세요.</p>
+    <p>안녕하세요! 예약 정보와 함께 주문하실 메뉴를 선택해주세요.</p>
 
     <form id="reservation-form">
+      <!-- 예약 정보 -->
       <label>이름</label><br>
       <input type="text" id="name" placeholder="이름을 입력하세요" required><br><br>
 
@@ -79,14 +94,41 @@
       <label>연락처</label><br>
       <input type="text" id="contact_info" placeholder="010-XXXX-XXXX 또는 이메일" required><br><br>
 
-      <button type="submit">예약 확인</button>
+      <!-- 메뉴 선택 -->
+      <div class="menu-section">
+        <h2>Appetizer</h2>
+        <label class="menu-item">
+          <input type="checkbox" name="menu" value="양송이 수프"> 🍄 양송이 수프
+        </label><br>
+        <label class="menu-item">
+          <input type="checkbox" name="menu" value="야채빵 브루스케타"> 🥖 야채빵 브루스케타
+        </label>
+
+        <h2>Main Course</h2>
+        <label class="menu-item">
+          <input type="checkbox" name="menu" value="토마토 치즈 그릴"> 🍅 토마토 치즈 그릴
+        </label><br>
+        <label class="menu-item">
+          <input type="checkbox" name="menu" value="라면 (+1000원)"> 🍜 라면 (+1000원)
+        </label>
+
+        <h2>Dessert</h2>
+        <label class="menu-item">
+          <input type="checkbox" name="menu" value="바닐라 아이스크림 (올리브 오일 & 후추)"> 🍨 바닐라 아이스크림 (올리브 오일 & 후추)
+        </label>
+
+        <h2>추가 요청사항</h2>
+        <textarea id="custom_request" rows="3" placeholder="예: 양송이 수프는 뜨겁게, 디저트는 식사 후에 주세요"></textarea>
+      </div>
+
+      <button type="submit">예약 및 주문 완료</button>
     </form>
 
     <div id="success-message"></div>
   </div>
 
   <script>
-    const FORM_URL = "https://formsubmit.co/ajax/ilu3312@naver.com"; // ✅ Ajax 전송 전용 URL
+    const FORM_URL = "https://formsubmit.co/ajax/ilu3312@naver.com";
 
     document.getElementById("reservation-form").addEventListener("submit", async function(event) {
       event.preventDefault();
@@ -96,38 +138,48 @@
       const time = document.getElementById("time").value;
       const contactType = document.getElementById("contact_type").value;
       const contactInfo = document.getElementById("contact_info").value;
+      const customRequest = document.getElementById("custom_request").value;
 
-      // 화면 메시지 표시
+      // 메뉴 선택값 모으기
+      const menuSelections = Array.from(document.querySelectorAll('input[name="menu"]:checked'))
+        .map(el => el.value)
+        .join(', ') || "선택 없음";
+
+      // 메시지 표시
       const msg = document.getElementById("success-message");
       msg.innerHTML = `
         ✅ ${name}님 예약이 완료되었습니다!<br>
         📅 ${date} / ⏰ ${time}<br>
-        📞 ${contactType}: ${contactInfo}<br><br>
+        📞 ${contactType}: ${contactInfo}<br>
+        🍽 주문하신 메뉴: ${menuSelections}<br>
+        ✏️ 요청사항: ${customRequest || "없음"}<br><br>
         정현식당에서 기다리고 있겠습니다 :)<br><br>
-        <small>5초 후 메뉴판으로 이동합니다...</small>
+        <small>5초 후 메뉴 안내 페이지로 이동합니다...</small>
       `;
       msg.style.display = "block";
       document.getElementById("reservation-form").style.display = "none";
 
-      // ✅ FormSubmit으로 Ajax 전송
+      // 이메일 전송
       try {
         await fetch(FORM_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            _subject: "정현식당에 새 예약이 도착했습니다!",
+            _subject: "정현식당에 새 예약 및 주문이 도착했습니다!",
             이름: name,
             날짜: date,
             시간: time,
             연락수단: contactType,
-            연락처: contactInfo
+            연락처: contactInfo,
+            주문메뉴: menuSelections,
+            추가요청: customRequest
           })
         });
       } catch (error) {
         console.error("메일 전송 실패:", error);
       }
 
-      // ✅ 5초 후 메뉴판으로 이동
+      // 5초 후 메뉴 페이지 이동
       setTimeout(() => {
         window.location.href = `welcome.html?name=${encodeURIComponent(name)}`;
       }, 5000);
