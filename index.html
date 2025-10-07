@@ -26,27 +26,34 @@
     }
     label, p {
       font-size: 1.6em;
+      text-align: center;
+      display: block;
     }
     input, select, button, textarea {
       font-family: inherit;
-      font-size: 1.2em;
-      padding: 8px 12px;
-      border-radius: 8px;
+      font-size: 1.3em;
+      padding: 10px 15px;
+      border-radius: 10px;
       border: 1px solid #ccc;
-      margin-top: 5px;
+      margin-top: 10px;
+      text-align: center;
+      width: 80%;
+      max-width: 400px;
     }
     button {
       background-color: #ffa4b5;
       color: white;
       border: none;
       cursor: pointer;
-      margin-top: 15px;
+      margin-top: 20px;
+      width: 60%;
+      max-width: 300px;
     }
     button:hover {
       background-color: #ff8a9e;
     }
     .menu-section {
-      text-align: left;
+      text-align: center;
       margin-top: 30px;
     }
     .menu-section h2 {
@@ -57,6 +64,11 @@
     .menu-item {
       margin: 10px 0;
       font-size: 1.4em;
+      display: block;
+    }
+    textarea {
+      height: 120px; /* 박스 크기 키움 */
+      resize: none;
     }
     #success-message {
       display: none;
@@ -74,24 +86,16 @@
 
     <form id="reservation-form">
       <!-- 예약 정보 -->
-      <label>이름</label><br>
+      <label>이름</label>
       <input type="text" id="name" placeholder="이름을 입력하세요" required><br><br>
 
-      <label>예약 날짜</label><br>
+      <label>예약 날짜</label>
       <input type="date" id="date" required><br><br>
 
-      <label>예약 시간</label><br>
+      <label>예약 시간</label>
       <input type="time" id="time" required><br><br>
 
-      <label>연락 수단</label><br>
-      <select id="contact_type" required>
-        <option value="">선택하세요</option>
-        <option value="전화">전화</option>
-        <option value="문자">문자</option>
-        <option value="이메일">이메일</option>
-      </select><br><br>
-
-      <label>연락처</label><br>
+      <label>연락처</label>
       <input type="text" id="contact_info" placeholder="010-XXXX-XXXX 또는 이메일" required><br><br>
 
       <!-- 메뉴 선택 -->
@@ -99,7 +103,7 @@
         <h2>Appetizer</h2>
         <label class="menu-item">
           <input type="checkbox" name="menu" value="양송이 수프"> 🍄 양송이 수프
-        </label><br>
+        </label>
         <label class="menu-item">
           <input type="checkbox" name="menu" value="야채빵 브루스케타"> 🥖 야채빵 브루스케타
         </label>
@@ -107,7 +111,7 @@
         <h2>Main Course</h2>
         <label class="menu-item">
           <input type="checkbox" name="menu" value="토마토 치즈 그릴"> 🍅 토마토 치즈 그릴
-        </label><br>
+        </label>
         <label class="menu-item">
           <input type="checkbox" name="menu" value="라면 (+1000원)"> 🍜 라면 (+1000원)
         </label>
@@ -118,7 +122,7 @@
         </label>
 
         <h2>추가 요청사항</h2>
-        <textarea id="custom_request" rows="3" placeholder="예: 양송이 수프는 뜨겁게, 디저트는 식사 후에 주세요"></textarea>
+        <textarea id="custom_request" placeholder="예: 양송이 수프는 뜨겁게, 디저트는 식사 후에 주세요"></textarea>
       </div>
 
       <button type="submit">예약 및 주문 완료</button>
@@ -136,21 +140,18 @@
       const name = document.getElementById("name").value;
       const date = document.getElementById("date").value;
       const time = document.getElementById("time").value;
-      const contactType = document.getElementById("contact_type").value;
       const contactInfo = document.getElementById("contact_info").value;
       const customRequest = document.getElementById("custom_request").value;
 
-      // 메뉴 선택값 모으기
       const menuSelections = Array.from(document.querySelectorAll('input[name="menu"]:checked'))
         .map(el => el.value)
         .join(', ') || "선택 없음";
 
-      // 메시지 표시
       const msg = document.getElementById("success-message");
       msg.innerHTML = `
         ✅ ${name}님 예약이 완료되었습니다!<br>
         📅 ${date} / ⏰ ${time}<br>
-        📞 ${contactType}: ${contactInfo}<br>
+        📞 연락처: ${contactInfo}<br>
         🍽 주문하신 메뉴: ${menuSelections}<br>
         ✏️ 요청사항: ${customRequest || "없음"}<br><br>
         정현식당에서 기다리고 있겠습니다 :)<br><br>
@@ -159,7 +160,6 @@
       msg.style.display = "block";
       document.getElementById("reservation-form").style.display = "none";
 
-      // 이메일 전송
       try {
         await fetch(FORM_URL, {
           method: "POST",
@@ -169,7 +169,6 @@
             이름: name,
             날짜: date,
             시간: time,
-            연락수단: contactType,
             연락처: contactInfo,
             주문메뉴: menuSelections,
             추가요청: customRequest
@@ -179,7 +178,6 @@
         console.error("메일 전송 실패:", error);
       }
 
-      // 5초 후 메뉴 페이지 이동
       setTimeout(() => {
         window.location.href = `welcome.html?name=${encodeURIComponent(name)}`;
       }, 5000);
